@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>知否-登录</title>
+    <link rel="stylesheet" href="lib/semantic/semantic.css">
+    <script src="jquery/jquery-3.3.1.js"></script>
+    <script src="lib/semantic/semantic.js"></script>
+    <style>
+        .mycheck:checked ~ .box:after, .ui.checkbox input:checked ~ label:after {
+            opacity: 1;
+            color: rgba(101, 59, 55, 0.95);
+        }
+        #login_container{
+
+            height: 100%;
+            margin: 0;
+        }
+        .ui.grid .column{
+
+        }
+        #login_back{
+            background-image: url("./pic/321644.jpg");
+            background-size: cover;
+        }
+        #password_field{
+            position: relative;
+        }
+        #password_field a{
+            position: absolute;
+            top:0;
+            right: 0;
+        }
+        #login_area{
+            padding-top:180px ;
+        }
+    </style>
+</head>
+<body>
+<!--login_container:登录容器-->
+<div class="ui grid" id="login_container">
+    <!--login_area：登录区-->
+    <div class="six wide column" id="login_area">
+        <!--登录 logo-->
+        <div class="ui basic segment" >
+            <h2 class="ui  header">
+                <img class="ui image" src="./pic/logo.png">
+                <div class="content">
+                    欢迎登录知否账号
+                </div>
+            </h2>
+            <p>纳尼？你还没有账号，还不赶快去
+                <a href=" ./register.html ">注册</a>
+                一个</p>
+
+
+        </div>
+        <!--登录表单-->
+        <div class="ui basic segment"><!--basic：去边框-->
+            <div class="ui form" id="logiform">
+                <div class="field">
+                    <label>邮箱号码</label>
+                    <input type="email" name="email" placeholder="请输入邮箱账号">
+                </div>
+                <div class="field" id="password_field">
+                    <label>密码</label>
+                    <a href="https://www.taobao.com">忘记密码?</a>
+                    <input type="password" name="password" placeholder="请输入账号密码">
+                </div>
+                <div class="field">
+                    <div>
+                        <div class="ui fluid input">
+                            <div class="ui checkbox mycheck" >
+                                <input type="checkbox" tabindex="0" class="hidden" name="term">
+                                <label>我同意本公司条款和协议</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="ui button fluid blue submit">提交</div> <!--fluid充满这个-->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--login_backL:登陆背景区-->
+    <div class="ten wide column" id="login_back">
+
+    </div>
+
+</div>
+
+</body>
+<script>
+    /*初始化复选框*/
+    $("div.ui.checkbox").checkbox();
+    /*登录表单验证*/
+    $('#logiform')
+        .form({
+            inline:true, /*内联显示报错信息*/
+            fields: {
+                name: {
+                    identifier: 'email',
+                    rules: [
+                        {
+                            type   : 'email',
+                            prompt : '请输入正确的邮箱格式'
+                        }
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入密码'
+                        },
+                        {
+                            type   : 'minLength[6]',
+                            prompt : '请输入6位'
+                        }
+                    ]
+                },
+                terms: {
+                    identifier: 'term',
+                    rules: [
+                        {
+                            type   : 'checked',
+                            prompt : '请仔细阅读并登录条款与协议'
+                        }
+                    ]
+                }
+            }
+        })
+    ;
+</script>
+</html>

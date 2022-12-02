@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>如何使用semantic ui</title>
+    <!-- 引入  semantic ui 样式文件 -->
+    <link rel="stylesheet" href="lib/semantic/semantic.css">
+    <!-- 引入 jquery 脚本文件 -->
+    <script src="jquery/jquery-3.3.1.js"></script>
+    <!-- 引入 semantic 脚本文件 -->
+    <script src="lib/semantic/semantic.js"></script>
+    <script src="lib/echarts-5.1.2/dist/echarts.min.js"></script>
+    <script src="lib/ckeditor/ckeditor.js"></script>
+    <style>
+
+        /*改变的是折叠菜单的容器*/
+        .ui.segment.leftMenuCon{
+            padding: 6px 10px;
+            margin: 5px auto;
+
+        }
+        div.ui.secondary.vertical.menu.fluid.transition.visible,
+        div.ui.secondary.vertical.menu.fluid{
+            margin: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="ui segment very padded" >
+    <div class="ui grid">
+        <!--折叠菜单-->
+        <div class="four wide column">
+            <div class="ui button blue fluid">
+                <i class='icon home'></i>主页</div>
+                <!--第一个折叠菜单-->
+            <div class="ui accordion">
+                <!--统计-->
+                <div class="ui  raised segment leftMenuCon">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        统计
+                    </div>
+                    <div class="content">
+                        <div class="ui secondary vertical menu fluid">
+                            <a class="item" data-tab="one"><span><i class="icon chart area"></i>&nbsp;&nbsp;</span>到访来客</a><!--active 默认激活-->
+                            <a class="item" data-tab="two"><span><i class="icon heart"></i>&nbsp;&nbsp;</span>粉丝数量</a>
+                            <a class="item" data-tab="three">文章统计</a>
+                        </div>
+                    </div>
+                </div>
+                <!--文章-->
+                <div class="ui  raised segment leftMenuCon">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        文章管理
+                    </div>
+                    <div class="content">
+                        <div class="ui secondary vertical menu fluid">
+                            <a class="item" data-tab="article-write"><span><i class="icon edit"></i></span>编写文章</a><!--active 默认激活-->
+                            <a class="item" data-tab="one_wz"><span><i class="icon file"></i></span>我的文章</a>
+                            <a class="item" data-tab="two_wz"><span><i class="icon time"></i></span>待审核文章</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!--用户-->
+                <div class="ui  raised segment leftMenuCon">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        用户信息
+                    </div>
+                    <div class="content">
+                        <div class="ui secondary vertical menu fluid">
+                            <a class="item"><span><i class="icon edit"></i></span>编写文章</a><!--active 默认激活-->
+                            <a class="item"><span><i class="icon file"></i></span>我的文章</a>
+                            <a class="item"><span><i class="icon time"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                        </div>
+                    </div>
+                </div>
+                <!--粉丝-->
+                <div class="ui  raised segment leftMenuCon">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        粉丝与关注
+                    </div>
+                    <div class="content">
+                        <div class="ui secondary vertical menu fluid">
+                            <a class="item"><span><i class="icon edit"></i></span>编写文章</a><!--active 默认激活-->
+                            <a class="item"><span><i class="icon file"></i></span>我的文章</a>
+                            <a class="item"><span><i class="icon time"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                        </div>
+                    </div>
+                </div>
+                <!--历史记录    -->
+                <div class="ui  raised segment leftMenuCon">
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        历史记录
+                    </div>
+                    <div class="content">
+                        <div class="ui secondary vertical menu fluid">
+                            <a class="item"><span><i class="icon edit"></i></span>编写文章</a><!--active 默认激活-->
+                            <a class="item"><span><i class="icon file"></i></span>我的文章</a>
+                            <a class="item"><span><i class="icon time"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                            <a class="item"><span><i class="icon edit"></i></span>待审核文章</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--选项页-->
+        <div class="twelve wide column">
+            <div class="ui tab" data-tab="one">
+                <!--到访来客图标-->
+                <div class="ui segment raised" style="height: 350px;" id="to-home-chart"></div>
+            </div><!-- ui table选项页-->
+            <div class="ui tab" data-tab="two">
+                <div class="ui two column grid ">
+                    <div class="column">
+                        <!--粉丝性别统计图-->
+                        <div class="ui segment raised" style="height: 350px;" id="fans-sex-chart"></div>
+                    </div>
+                    <div class="column">2</div>
+                </div>
+            </div><!-- ui table选项页-->
+            <div class="ui tab" data-tab="three">3<!-- ui table选项页-->
+                <div class="ui segment" id="count-arrticle">123
+                <div id="artion_count"></div>
+                </div></div>
+            <div class="ui tab" data-tab="article-write"><div class="ui segment">
+                <!--副文本编辑器【ckeditor】-->
+                <textarea name="editor" id="editor"></textarea>
+            </div></div><!-- ui table选项页-->
+            <div class="ui tab" data-tab="one_wz">4</div><!-- ui table选项页-->
+            <div class="ui tab" data-tab="two_wz">5</div><!-- ui table选项页-->
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script>
+    /*选项页初始化*/
+    /*$('.ui.accordion .menu a.item').tab()*/
+    $('a.item[data-tab]').tab({
+        /*每一次点击选项页时执行的函数 [a:选项页的名字]*/
+        onLoad:function (a,b,c) {
+            if(a ==='one'){
+             /*加载到访来客的图标*/
+                getToHomeChart();
+            }else if(a==='two'){
+                getFansSexCharts();
+            }else if(a==='article-write'){
+                ckEditorLoad();
+            }
+        }
+    })
+    /*折叠菜单初始化*/
+    $('.ui.accordion').accordion({
+        selected:{
+            trigger:'.title',/*触发器标题*/
+        }
+
+    })
+
+</script>
+
+<script type="text/javascript">
+
+    var myChart=echarts.init(document.getElementById('count-arrticle'))
+    myChart.resize({
+        width: 600,
+        height: 300
+    });
+    var option = {
+
+        title:{
+            text:'折线图'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [150, 230, 224, 218, 135, 147, 260],
+                type: 'line'
+            }
+        ]
+
+    };
+    myChart.setOption(option);
+</script>
+<!--到访来客的方法-->
+<script type="text/javascript">
+
+    /*获取到访来客的图表*/
+    function  getToHomeChart() {
+        var myChart=echarts.init(document.getElementById('to-home-chart'))
+        /*myChart.resize({
+            width: 600,
+            height: 300
+        });*/
+        var option = {
+            color:['#b44d4d','#21bfb2','#1eef8e',],
+            title:{
+                text:'到访来客统计',
+                left:'center',
+            },
+            tooltip:{
+                trigger: 'axis',
+                /* trigger: 'item' ,*/
+                axisPointer: {
+                    type: 'cross',/*指示器类型。十字准星指示器*/
+                },
+            },
+            legend:{
+                bottom:10
+            },
+
+            toolbox:{      /*工具栏*/
+                right:15,
+                top:15,
+                itemSize:'17', /*工具栏图标的尺寸*/
+                orient:'vertical',
+                feature:{
+                    restore:{   /*还原*/
+                        title:'还原',
+                        icon:"image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAwlJREFUaEPt103IVlUQB/CfRiSGq5AWuWkhBm00EgqhzCSwLIw+CBeFYClR4SIKJBJtEaFF6i4oBF2UqSB9uNGNpIhFuRFbRIsUJYJKTdTSlIFz4fJ03/ee59770vvgHXg2z5nzn/nPzJ0zM8WIy5QR919P4P/OYJ+BPgMtI9CXUMsAtr5+Q2VgFu6vCNnn44TxVtyBafgdv+Fy67CXAIbJwDPYWWF8EGMRnsNi3Dmg/ze+w358jF/akumSwMPYiHmZTl3FZ3gdZzLv/EetCwJRHpvxEo1Gkz+xOpEZmkcXBKIcolyqJOr9JC7gNsR3VCXX8AY2DcugCwKDNqM0duMjHMKlksLteAyvYm6FsyuwbRgSXRP4ES/gaI0TU1PZvJ86VKEeGbsPx3JJdEkgnF6S2mWu/QfwNaLdFvIN4v8oq1rpikD0+DdxtsLieO9EqD+NQZ0n8EWt90N2jbHegTo7OUHagydLQHuxrA44znPAC5yJJBBvx/clh/9JXet8HYnJQiD8PIG7Sg4/iIOjROATRBst5DVsHSUC7+CtksNr8W6XBOqw2p6vx9slkHXYUAc6zDdQh9X2fLCEVqXXfFzcyUQgXvE5JW9jvjpQF5UuCMRY8G+doZrzwTYa89NM/FWH25ZAGN6BF3G4ztg457vwVOn8KyzNwWtD4GUUw1iMzPPxa47RAZ1nK3aBR7EvB6spgXvTxFm+H6viI/gjx3DSWYiI9vTSnSNj7N6VsE0JBNh7aQkpA/+E5fi2hkR8N68kjNjoCrmYMnk8NwhtCNyEGMJicixLjMFR07G0xygQThUSC83jWIO7K+6tRLTTbGlDIIxE6r/EQ2NYvIJTOIdwPn5VEqSD1JZsz5NiWwIBczM+RHzUTSR2iehikc2hpQsChdGYHj/APZleRHa2p/EhstRIuiQQDgTeAjyf1sLZiA+2kNh5f0jb1qf4uZHXpUtdExj0Z0Z6UW9J38Hp3F03l9hEE8j1o7FeT6Bx6Dq62Gego0A2hukz0Dh0HV3sM9BRIBvDjHwGrgO9eX4xYVSMlwAAAABJRU5ErkJggg==",
+                    },
+                    saveAsImage:{
+                        title:'保存为图片',/*下载图片*/
+                        icon:'image://data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzIgMzIiIGhlaWdodD0iMzJweCIgaWQ9InN2ZzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIiB3aWR0aD0iMzJweCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgaWQ9ImJhY2tncm91bmQiPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iMzIiIHdpZHRoPSIzMiIvPjwvZz48ZyBpZD0iaW1hZ2VfeDVGX2FjY2VwdCI+PHBhdGggZD0iTTI4LDhoLTRsLTQtNGgtOC4wMDFMOCw4SDRjMCwwLTQsMC00LDR2MTJjMCw0LDQsNCw0LDRzNS42NjIsMCwxMS41MTgsMGMxLjYxNCwyLjQxMSw0LjM2MSwzLjk5OSw3LjQ4Miw0ICAgYzMuODc1LTAuMDAyLDcuMTY3LTIuNDU0LDguNDM2LTUuODg4QzMxLjk5NSwyNS4wNzYsMzIsMjQsMzIsMjRzMC04LDAtMTJTMjgsOCwyOCw4eiBNMTQuMDMzLDIzLjY2QzExLjY4NiwyMi44NDcsMTAsMjAuNjI2LDEwLDE4ICAgYzAtMy4zMTIsMi42ODQtNiw2LTZjMS45MTQsMCwzLjYwNywwLjkwOCw0LjcwNiwyLjMwNkMxNi44NDgsMTUuMzIxLDE0LDE4LjgyMiwxNCwyM0MxNCwyMy4yMjMsMTQuMDE4LDIzLjQ0MSwxNC4wMzMsMjMuNjZ6ICAgIE0yMywyOS44ODNjLTMuODAxLTAuMDA5LTYuODc2LTMuMDg0LTYuODg1LTYuODgzYzAuMDA5LTMuODAxLDMuMDg0LTYuODc2LDYuODg1LTYuODg1YzMuNzk5LDAuMDA5LDYuODc0LDMuMDg0LDYuODgzLDYuODg1ICAgQzI5Ljg3NCwyNi43OTksMjYuNzk5LDI5Ljg3NCwyMywyOS44ODN6Ii8+PHBvbHlnb24gcG9pbnRzPSIxOCwyMyAyMCwyMSAyMiwyMyAyNiwxOSAyOCwyMSAyMiwyNyAgIi8+PC9nPjwvc3ZnPg==',
+                    },
+                    magicType:{             /*动态类型切换*/
+                        type:['line','bar'],
+                        title:{
+                            line:'柱状图',
+                            bar:'曲线图'
+                        },
+                        icon: {
+                            line: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAhxJREFUaEPtmbtKA0EUhr8gXhpfQPA5tLNWENRGGxEvbyCoqOANRNA3sLLSQrQSsbWx8hms9AGsjAjKCbthXbMzZ/aSychul2TmnP87/5lLkgaBP43A9VMD+HawdqAXHDgG1oGBSMwncAbs+BanyS8t1EyIj+fIe0OaAL7HCMB3hogg1odPgFHgChgD+pRO/mlvnwAifl4pPDnsV3v7BHgCxnMAyJR2e/sEWAPOQwYQ7ZvASQ6InnAg1p0HojSAQeAAWIrUXAB70dniUtgjYNdhQikAcnJfA9OpxA/ADPChFJQVxzS9MIAtqRbCFicLohCANqkNQhunE0RuANekWRCucdIQuQBkwd4AU8rejofdA7OJhS1xboFJQxyZ82xY2M4AecWnIeS1RnwMvB/taknWL6A/fkN7El8CC5aKyce2qmrGJN2S8WmIR2DCFeAdGM4AELvnomu5rbqm7ku3WnLsKrACvAAbwJsrQNZpGYuP93xNf3eCMIk3LjltC3WysqwdxrbdlgYggbaAbeAOWDactlonclfetYUcd87WcNteX6jy3QAwQZQiXhK4rIE8LsgcaSfZCpM3VnktXw0LP90AKCzSFKAGqLS8iuC1A4oiVTrkXztQaeVKCN76mdHkQAk5Kg/RDB2gdRK/AiOV16qiBAIgP+3JfT/Ep9VCcms8BBYDc0IW8WkQ/8LY7kIhtk5bc+2Ab/tqB3w78ANCMIEoi+y3ZQAAAABJRU5ErkJggg==',
+                            bar: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAU1JREFUaEPtmU1uwkAMRl9YVJyBm4GAS3TRBTsWFVI5RuFmHAIWLXKUoFHVdqz5y4xwliPH+T4/e2CSjsavrnH9mIGpCRqBGgi8A6/AyyDmBhyB3dTigBOwhMesfgNnYD1qkxa6OuLHdVmbV2DgyxE/yhETM9eALPx21TAfXm0i0hsUQMKLXpnTqy2XAS/62g14K2cGhgrkaiEjMBTYW4gpCWh2qqoNaHaqqg14xWl+o6ZsITMgg/6UBJLsHpr+1sSEEEiye2jEaWJCDCQZPo04TYwZcP5VugegYpSMQIsENLtQsZiQFvoEVj9edcja1qFRLCbEgPI0WCbMDJSp899PMQJGILIC/7VQZOrst/dv0Vs2IBW6tm6gP1JegEV24JkeIAYOwFum/LnT9i0kn5b2wKYxEjLEHzV8hYmiZAaiypfgZiOQoIhRKZoncAcfCokoBLOOhwAAAABJRU5ErkJggg=='
+                        }
+
+
+                    },
+                    myTool2: {
+                        show: true,
+                        title: '自定义扩展方法',
+                        icon: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAydJREFUaEPtmEvITkEYx39fYWHhXhQpig1JkWsusXIrC5TbSm5bFj6SS0IidiKWKKEoLMldJAtWxEKIcgmxkFt/zdG808x7xteZc7yfM6vv/eaZZ/7/ee6njRZfbS2On5pA1RbMs8AEYCLQLQLoV+AWcDtHtlCdIQK9gBPArAjgrshFYAnwwdlIoTMYAwLREfAZ5gvAXIdACp1eAjKxXEHrh7HEiwhLDASWwh+d44E75lwKnb9V+1xoPbDPXHwMWB4BPhORvEhoSc9+6++idQYJbAO2mou3A/odu0JnU+isCfisUlvA8ypN3c8XxCn8NYXOOgbqGIjMzf9fDBRVidcBBwquxLbOYBDbfctP0ws9iDD3KGBxRC9UlM4gAW2om5wdATokch6Y52ym0Blsp3sCx4E5HSAh8Ms880AKnbkz8ThgMtA/gsgr4AZwN0e2UJ15I2UE7mpFOj2BQgdwj626GhcdDvQG3gOPgOvAtxjbljnU23g04G8AVhvgLlYROQTs8SSDBtkQgSQDuLl5NHAOGBzxwi+B+c0Sg49AsgEcGAtcAbpb4J8Al4B3QB9gJjDU2v8CTAXu+QiXNdTrbrnNQ0BfL7TeAGuBM4Cqc7aEaQFwEOhn/vkcGAF8dEmUNdDo3t1AuwV+EvC4iRsNA25aJHYCm6sioGzz2grYhcDpiBhYBJw0cnIxFdSG7FSWBaYDlw0Q+bxe13abEBfhk/wQIzANuGoLl0VgFXDYXHwE0O/YdRRYYYR1TucbAsZVlGIA3wjsMhcpFjbFojfndF5L53S+dAK2BfSiK/+CwD9hgaJiQPXgWhUWcLOQssupCCvYWegtMKCqLCSsioHMl1XEYuqAPvP3NUR3AFtc0ikrsTuAayJTJR5kQOhFVYlVD9xKrDqhSpyBfwaMBD7FEEgx1Gf3jjF53O6FnpoaIauodZhh5X2d+wxMAe77XC7UjSYZwA0AkThrWaJZKOjl1Y16wetgiECSAdxC2sPMA2tMB+qSkHvJhfb63CYvC9n7hQ7gnqfuYk1kaqUFXBOZPg58j8hSuV8lYnRUKtPph/pKXzfm8pa3wC+/OyxAYlSJUAAAAABJRU5ErkJggg==',
+                        onclick: function (){
+                            alert('myToolHandler2')
+                        }
+                    }
+                },
+                showTitle:false,
+                tooltip: { // 和 option.tooltip 的配置项相同
+                    show: true,
+                    formatter: function (param) {
+                        return param.title
+                    }},
+            },
+
+            xAxis: {
+                type: 'category',
+                data: ['31日', '1日', '2日', '3日', '4日', '5日', '6日'],
+                axisPointer:{
+                    label:{
+                        backgroundColor:'#c47f4d'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisPointer:{
+                    // show:false,不显示用这个
+                    label:{
+                        backgroundColor:'#64959e'
+                    }
+                }
+            },
+
+            series: [
+                {
+                    data: [150, 230, 224, 218, 135, 147, 260],
+                    type: 'line',
+                    /*曲线*/
+                    smooth:true,
+                    name:'到访数',
+                },
+                {
+                    data: [60, 50, 78, 122, 65, 120, 78], /*小于150*/
+                    type: 'bar',
+                    name:'点赞数',
+                    itemStyle:{
+                        borderRadius:[5,5,0,0],/*圆角*/
+                    }
+                },
+                {
+                    data: [37, 50, 56, 15, 10, 12, 78], /*小于150*/
+                    type: 'bar',
+                    name:'拉胯',
+                },
+            ]
+
+        };
+        myChart.setOption(option);
+    }
+
+</script>
+<!--粉丝性别统计图表-->
+<script type="text/javascript">
+    /*获取粉丝性别的统计图表*/
+    function getFansSexCharts() {
+        var dom = document.getElementById("fans-sex-chart");
+        var myChart = echarts.init(dom);
+        var option = {
+            legend: {
+                top: 'bottom'
+            },
+            tooltip:{
+            },
+            toolbox: {
+                show: true,
+
+                feature: {
+                    restore: { show: true },/*恢复到原来的状态*/
+                    saveAsImage: {
+                        show: true },
+                    myTool2: {
+                        show: true,
+                        title: '更多',
+                        icon: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAydJREFUaEPtmEvITkEYx39fYWHhXhQpig1JkWsusXIrC5TbSm5bFj6SS0IidiKWKKEoLMldJAtWxEKIcgmxkFt/zdG808x7xteZc7yfM6vv/eaZZ/7/ee6njRZfbS2On5pA1RbMs8AEYCLQLQLoV+AWcDtHtlCdIQK9gBPArAjgrshFYAnwwdlIoTMYAwLREfAZ5gvAXIdACp1eAjKxXEHrh7HEiwhLDASWwh+d44E75lwKnb9V+1xoPbDPXHwMWB4BPhORvEhoSc9+6++idQYJbAO2mou3A/odu0JnU+isCfisUlvA8ypN3c8XxCn8NYXOOgbqGIjMzf9fDBRVidcBBwquxLbOYBDbfctP0ws9iDD3KGBxRC9UlM4gAW2om5wdATokch6Y52ym0Blsp3sCx4E5HSAh8Ms880AKnbkz8ThgMtA/gsgr4AZwN0e2UJ15I2UE7mpFOj2BQgdwj626GhcdDvQG3gOPgOvAtxjbljnU23g04G8AVhvgLlYROQTs8SSDBtkQgSQDuLl5NHAOGBzxwi+B+c0Sg49AsgEcGAtcAbpb4J8Al4B3QB9gJjDU2v8CTAXu+QiXNdTrbrnNQ0BfL7TeAGuBM4Cqc7aEaQFwEOhn/vkcGAF8dEmUNdDo3t1AuwV+EvC4iRsNA25aJHYCm6sioGzz2grYhcDpiBhYBJw0cnIxFdSG7FSWBaYDlw0Q+bxe13abEBfhk/wQIzANuGoLl0VgFXDYXHwE0O/YdRRYYYR1TucbAsZVlGIA3wjsMhcpFjbFojfndF5L53S+dAK2BfSiK/+CwD9hgaJiQPXgWhUWcLOQssupCCvYWegtMKCqLCSsioHMl1XEYuqAPvP3NUR3AFtc0ikrsTuAayJTJR5kQOhFVYlVD9xKrDqhSpyBfwaMBD7FEEgx1Gf3jjF53O6FnpoaIauodZhh5X2d+wxMAe77XC7UjSYZwA0AkThrWaJZKOjl1Y16wetgiECSAdxC2sPMA2tMB+qSkHvJhfb63CYvC9n7hQ7gnqfuYk1kaqUFXBOZPg58j8hSuV8lYnRUKtPph/pKXzfm8pa3wC+/OyxAYlSJUAAAAABJRU5ErkJggg==',
+                        onclick: function (){
+                            alert('myToolHandler2')
+                        }
+                    }
+                },
+            },
+            series: [
+                {
+                    name: '粉丝男女比列',
+                    type: 'pie',
+                    radius: [30, 100],
+                    /*center: ['50%', '50%'],*/
+                    roseType: 'radius',
+                    selectedMode:'single',/*可单选元素*/
+                    selectedOffset:'12',/*选中之后的偏移量*/
+                    emphasis:{/*高光*/
+                        label:{
+                            fontWeight:'bold',/*加粗*/
+
+                        },
+                        itemStyle:{
+                            shadowColor:'#a1a1a1',
+                            shadowOffsetX:'0',
+                            shadowOffsety:'0',
+                            shadowBlur:'10',/*影子*/
+                        },
+                    },
+                    label:{
+                        formatter:'{b}:{d}%',
+                    },
+                    itemStyle: {
+                        borderRadius: 8,
+                        borderColor:'#FFFFFF',
+                        borderWidth:3,
+                        borderType:'solid',
+                    },
+                    data: [
+                        { value: 40, name: '男' },
+                        { value: 38, name: '女' },
+                        { value: 32, name: '未知' },
+
+                    ]
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+    }
+    
+
+
+</script>
+<script type="text/javascript">
+    /*富文本编辑器初始化*/
+    function ckEditorLoad(){
+        /**/
+        CKEDITOR.replace( 'editor',{
+            /*皮肤*/
+            skin:'office2013',
+            /*工具栏*/
+            toolbarGroups:[
+                { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+                { name: 'forms', groups: [ 'forms' ] },
+                '/',
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                { name: 'links', groups: [ 'links' ] },
+                { name: 'insert', groups: [ 'insert' ] },
+                { name: 'styles', groups: [ 'styles' ] },
+                { name: 'colors', groups: [ 'colors' ] },
+                { name: 'tools', groups: [ 'tools' ] },
+                { name: 'others', groups: [ 'others' ] },
+                { name: 'about', groups: [ 'about' ] }
+            ],
+            /*移除*/
+            removeButtons:'About,ShowBlocks,Flash,HorizontalRule,Source,Save,Templates,NewPage,ExportPdf,Preview,Print,Blockquote,CopyFormatting,SelectAll,Scayt',
+
+        })}
+
+</script>
+</html>
